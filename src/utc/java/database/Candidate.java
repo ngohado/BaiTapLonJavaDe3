@@ -11,7 +11,6 @@ package utc.java.database;
  * @author Ngo Hado
  */
 public class Candidate {
-    private int id ;
 
     public int getId() {
         return id;
@@ -101,6 +100,7 @@ public class Candidate {
         this.area = area;
     }
     
+    private int id ;
     private String fullName ;
     private Province province ;
     private String dateOfBirh ;

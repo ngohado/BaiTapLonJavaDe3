@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Vector;
 
 /**
  *
@@ -48,6 +49,8 @@ public class GetData {
             element.setPhysicalPoint(resultSet.getFloat("physics"));
 
             element.setChemistryPoint(resultSet.getFloat("chemistry"));
+            
+            element.setEnglishPoint(resultSet.getFloat("english"));
 
             String[] arrDate = resultSet.getString("bod").split("-");
             element.setDateOfBirh(arrDate[2]+"/"+arrDate[1]+"/"+arrDate[0]);
@@ -62,6 +65,39 @@ public class GetData {
         }
 
         return arrCandidate;
+    }
+    
+    public static Vector toString(ArrayList<Candidate> a){
+        Vector dataMain = new Vector();
+        for(int i=0 ; i<a.size() ; i++){
+            Candidate temp = (Candidate) a.get(i);
+            Vector data = new Vector();
+            data.add(temp.getId()+"");
+            data.add(temp.getFullName());
+            data.add(temp.getProvince().getProvinceName());
+            data.add(temp.getDateOfBirh());
+            if(temp.getSex()){
+                data.add("Male");
+            } else data.add("Female");
+            data.add(temp.getUnit());
+            data.add(temp.getMathPoint()+"");
+            data.add(temp.getPhysicalPoint()+"");
+            switch(temp.getUnit()){
+                case "A":
+                    data.add(temp.getChemistryPoint()+"");
+                    data.add("x");
+                    break;
+                case "A1":
+                    data.add("x");
+                    data.add(temp.getEnglishPoint()+"");                   
+                    break;
+            }
+            data.add(temp.getArea().getAreaName());
+            
+            dataMain.add(data);
+        }
+        
+        return dataMain;
     }
 
 }
