@@ -18,6 +18,8 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -25,6 +27,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import utc.java.database.Candidate;
 import utc.java.database.GetData;
 
@@ -68,7 +71,7 @@ public class ListStudentPanel extends JPanel {
         
         //textfield
         tfKeySearch = new JTextField();
-        tfKeySearch.setPreferredSize(new Dimension(250, 30));
+        tfKeySearch.setPreferredSize(new Dimension(250, 25));
 
         //combobox   
         DefaultComboBoxModel modelCbb = new DefaultComboBoxModel(tbmCustom.columns);
@@ -79,6 +82,9 @@ public class ListStudentPanel extends JPanel {
         btFiltre = new JButton("Filtre");
         btFiltre.setPreferredSize(dmsButton);
         btFiltre.setFocusable(false);
+//        btFiltre.setVerticalTextPosition(SwingConstants.BOTTOM);
+//        btFiltre.setHorizontalTextPosition(SwingConstants.CENTER);
+        btFiltre.setIcon(new ImageIcon("filtre.png"));
         btFiltre.addActionListener(new ActionListener() {
 
             @Override
@@ -98,6 +104,7 @@ public class ListStudentPanel extends JPanel {
         btAdd = new JButton("ADD");
         btAdd.setPreferredSize(dmsButton);
         btAdd.setFocusable(false);
+        btAdd.setIcon(new ImageIcon("add.png"));
         btAdd.addActionListener(new ActionListener() {
 
             @Override
@@ -114,11 +121,12 @@ public class ListStudentPanel extends JPanel {
         btUpdate = new JButton("UPDATE");
         btUpdate.setPreferredSize(dmsButton);
         btUpdate.setFocusable(false);
+        btUpdate.setIcon(new ImageIcon("update.png"));
         btUpdate.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                
             }
         });
 
@@ -126,6 +134,7 @@ public class ListStudentPanel extends JPanel {
         btDelete = new JButton("DELETE");
         btDelete.setPreferredSize(dmsButton);
         btDelete.setFocusable(false);
+        btDelete.setIcon(new ImageIcon("delete.png"));
         btDelete.addActionListener(new ActionListener() {
 
             @Override
@@ -137,6 +146,7 @@ public class ListStudentPanel extends JPanel {
         btRefresh = new JButton("REFRESH");
         btRefresh.setPreferredSize(dmsButton);
         btRefresh.setFocusable(false);
+        btRefresh.setIcon(new ImageIcon("refresh.png"));
         btRefresh.addActionListener(new ActionListener() {
 
             @Override

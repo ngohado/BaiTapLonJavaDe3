@@ -12,9 +12,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
+import utc.java.database.Area;
 import utc.java.database.Candidate;
 import utc.java.database.DatabaseConnection;
 import utc.java.database.GetData;
+import utc.java.database.AdjustData;
+import utc.java.database.Province;
 import utc.java.liststudent.ListStudentPanel;
 
 /**
@@ -37,6 +40,7 @@ public class MainFrame {
         ListStudentPanel studentPanel = new ListStudentPanel(arr,3);
         mainFrame.add(studentPanel);
         mainFrame.setVisible(true);
-   
+        
+        
     }
 }
