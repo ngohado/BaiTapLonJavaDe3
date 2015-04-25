@@ -66,6 +66,51 @@ public class GetData {
 
         return arrCandidate;
     }
+    public static Candidate getOneCandidatesInformation(Connection connect,String id) throws SQLException {
+        String querySQL = "select *\n"
+                + "from TbArea,TbListCandidate,TbProvince\n"
+                + "where (TbArea.areaCode=TbListCandidate.areaCode) and (TbListCandidate.provinceCode=TbProvince.provinceCode) and (TbListCandidate.id="+id+")";
+
+        Statement statement = connect.createStatement();
+        ResultSet resultSet = statement.executeQuery(querySQL);
+        Candidate element = new Candidate();
+        if (resultSet.next()) {
+            
+
+            element.setId(resultSet.getInt("id"));
+
+            element.setFullName(resultSet.getString("fullName"));
+
+            Province a = new Province();
+            a.setProvinceCode(resultSet.getInt("provinceCode"));
+            a.setProvinceName(resultSet.getString("provinceName"));
+            element.setProvince(a);
+
+            element.setSex(resultSet.getInt("sex") == 1 ? true : false);
+
+            element.setUnit(resultSet.getString("unit"));
+
+            element.setMathPoint(resultSet.getFloat("math"));
+
+            element.setPhysicalPoint(resultSet.getFloat("physics"));
+
+            element.setChemistryPoint(resultSet.getFloat("chemistry"));
+            
+            element.setEnglishPoint(resultSet.getFloat("english"));
+
+            String[] arrDate = resultSet.getString("bod").split("-");
+            element.setDateOfBirh(arrDate[2]+"/"+arrDate[1]+"/"+arrDate[0]);
+
+            Area area = new Area();
+            area.setAddPoint(resultSet.getFloat("addPoint"));
+            area.setAreaName(resultSet.getString("areaName"));
+            area.setCode(resultSet.getInt("areaCode"));
+            element.setArea(area);
+
+        }
+
+        return element;
+    }
     
     public static Vector toString(ArrayList<Candidate> a){
         Vector dataMain = new Vector();

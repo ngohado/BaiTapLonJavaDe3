@@ -18,6 +18,10 @@ public class Filtre {
     public static ArrayList<Candidate> filtreData(ArrayList<Candidate> arrCandidate, String fieldData, String keySearch) throws SQLException {
         ArrayList<Candidate> arrFiltre = new ArrayList<Candidate>();
 
+        if("".equals(keySearch)){
+            return arrCandidate;
+        }
+        
         switch (fieldData) {
             case "ID":
                 for (int i = 0; i < arrCandidate.size(); i++) {
@@ -85,7 +89,7 @@ public class Filtre {
                 }
                 break;
 
-            case "Math Point":
+            case "Math":
                 for (int i = 0; i < arrCandidate.size(); i++) {
                     Candidate temp = arrCandidate.get(i);
                     if (temp.getMathPoint() == Float.parseFloat(keySearch)) {
@@ -94,7 +98,7 @@ public class Filtre {
                 }
                 break;
 
-            case "Physics Point":
+            case "Physics":
                 for (int i = 0; i < arrCandidate.size(); i++) {
                     Candidate temp = arrCandidate.get(i);
                     if (temp.getPhysicalPoint() == Float.parseFloat(keySearch)) {
@@ -103,7 +107,7 @@ public class Filtre {
                 }
                 break;
 
-            case "Chemistry Point":
+            case "Chemistry":
                 for (int i = 0; i < arrCandidate.size(); i++) {
                     Candidate temp = arrCandidate.get(i);
                     if (temp.getChemistryPoint() == Float.parseFloat(keySearch)) {
@@ -112,7 +116,7 @@ public class Filtre {
                 }
                 break;
 
-            case "English Point":
+            case "English":
                 for (int i = 0; i < arrCandidate.size(); i++) {
                     Candidate temp = arrCandidate.get(i);
                     if (temp.getEnglishPoint() == Float.parseFloat(keySearch)) {

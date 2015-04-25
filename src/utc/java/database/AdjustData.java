@@ -55,7 +55,7 @@ public class AdjustData {
            
     }
     
-    public static void deleteCandidate(Connection connect ,int id) throws SQLException{
+    public static void deleteCandidate(Connection connect ,String id) throws SQLException{
         
         //Xay dung cau lenh SQL
         String deleteSQL = new StringBuilder("delete from TbListCandidate\n").append("where id="+id).toString();
