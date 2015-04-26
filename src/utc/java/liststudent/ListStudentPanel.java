@@ -178,7 +178,6 @@ public class ListStudentPanel extends JPanel {
         tbStudent = new JTable();
         tbStudent.getTableHeader().setReorderingAllowed(false);
         tbStudent.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-
         tbStudent.getTableHeader().addMouseListener(new MouseAdapter() {
 
             @Override
@@ -259,6 +258,7 @@ public class ListStudentPanel extends JPanel {
     private void refreshDatabase() throws SQLException {
         arrCandidate.clear();
         arrCandidate.addAll(GetData.getAllCandidatesInformation(connect));
+        arrCurrentFiltre.clear();
         arrCurrentFiltre.addAll(arrCandidate);
         allData = GetData.toString(arrCandidate);
     }

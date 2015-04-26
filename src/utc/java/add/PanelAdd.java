@@ -35,7 +35,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.TitledBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import tdt.Object.Candidate;
+import utc.java.database.Candidate;
 
 /**
  *
@@ -189,7 +189,10 @@ public class PanelAdd {
         cbGender.setFocusable(false);
         addComponent(pAddMain, cbGender, 2, 1, 1, 2);
         
-        dcDOB.setDateFormatString("dd/MM/yyyy");
+        try {
+            dcDOB.setDateFormatString("dd/MM/yyyy");
+        } catch (Exception e) {
+        }
         addComponent(pAddMain, dcDOB, 3, 1, 1, 2);
         
         cbUnit.setModel(new DefaultComboBoxModel(new String[]{"A","A1"}));

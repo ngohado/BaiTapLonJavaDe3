@@ -11,13 +11,14 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import static java.awt.GridBagConstraints.CENTER;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
@@ -25,10 +26,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import tdt.Object.Candidate;
 import utc.java.add.PanelAdd;
 import utc.java.database.DatabaseConnection;
 import utc.java.database.GetData;
+import utc.java.liststudent.ListStudentPanel;
 
 /**
  *
@@ -50,15 +51,29 @@ public class FrameMain implements ActionListener{
     
     private Connection con ;
     
-    private PanelAdd p2;
+    public static ListStudentPanel p1;
+    public static PanelAdd p2;
     
-    public FrameMain(){
+    private int accessLevel;
+    public FrameMain(int al) throws SQLException{
+        accessLevel = al;
         initComponent();
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FrameMain.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(FrameMain.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(FrameMain.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(FrameMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
-    private void initComponent(){
-        DatabaseConnection dbc = new DatabaseConnection();
+    private void initComponent() throws SQLException{
         GetData gd = new GetData();
+        
         try {
             con = DatabaseConnection.getDatabaseConnection();
         } catch (SQLException ex) {
@@ -78,6 +93,7 @@ public class FrameMain implements ActionListener{
         pTable3 = new JPanel();
         pTable4 = new JPanel();
 
+        p1 = new ListStudentPanel(con, accessLevel);
         p2 = new PanelAdd();
                 
         fMain.setLayout(new BorderLayout());
@@ -86,7 +102,10 @@ public class FrameMain implements ActionListener{
         fMain.setLocationRelativeTo(null);
         fMain.setResizable(false);
         
-        pToolbar.setBackground(new Color(53, 96, 182));
+        
+        pToolbar.setLayout(new BorderLayout());
+        JLabel banner = new JLabel(new ImageIcon("banner.png"));
+        pToolbar.add(banner);
         pToolbar.setPreferredSize(new Dimension(43,80));
         fMain.add(pToolbar,BorderLayout.NORTH);
         
@@ -118,13 +137,11 @@ public class FrameMain implements ActionListener{
         
         fMain.add(pTool,BorderLayout.WEST);
         
-        pTable1.setBackground(Color.white);
-        JLabel l1 = new JLabel("table 1");
-        pTable1.add(l1);
+        pTable1 = p1 ;
         pTable.add(pTable1,"card1");
         openPanel(pTable1, pTable2, pTable3, pTable4);
         
-//        pTable2.setBackground(Color.white);
+        
         pTable2 = p2.getPanelAdd();
         pTable.add(pTable2,"card2");
         
@@ -145,19 +162,9 @@ public class FrameMain implements ActionListener{
         fMain.setVisible(true);
     }
     
-    public static void main(String[] args) {
-        FrameMain fm = new FrameMain();
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(FrameMain.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            Logger.getLogger(FrameMain.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(FrameMain.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(FrameMain.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public static void main(String[] args) throws SQLException {
+        FrameMain fm = new FrameMain(1);
+        
     }
 
     @Override
